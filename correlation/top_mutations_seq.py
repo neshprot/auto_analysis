@@ -4,6 +4,14 @@ from collections import Counter
 from itertools import combinations
 
 
+def read_and_parse_out_file(filename):
+    merged_dict = {}
+    with open(filename, 'r') as inf:
+        for line in inf.readlines():
+            words = line.split()
+            merged_dict[" ".join(words[:-2:])] = [float(x) for x in words[-2::]]
+    return merged_dict
+
 def get_top_num(muts_dic, param, number):
     sorted_muts = sorted(muts_dic.items(), key=lambda item: item[1][param], reverse=True)
     max_param = sorted_muts[0][1][param]

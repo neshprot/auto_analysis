@@ -207,7 +207,7 @@ def correlation_between_muts(inp_file):
 
 
 def write_to_file(merged_dict, file_name):
-    with open(f'out_{file_name}', 'w') as ouf:
+    with open(f'../outlogs/out_{file_name}', 'w') as ouf:
         for muts, values in merged_dict.items():
             ouf.write(f'{muts} {values[0]} {values[1]}\n')
 
