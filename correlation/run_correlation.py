@@ -5,8 +5,9 @@ from sklearn.linear_model import Lasso
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.feature_selection import SelectFromModel
+from top_mutations_seq import *
 
-def lasso(columns_per_mutation, y, alpha):
+def lasso(columns_per_mutation, y, alpha, unique_sites):
     X = np.column_stack(columns_per_mutation)
 
     # Разбиение на обучающую и тестовую выборки
@@ -44,7 +45,7 @@ def lasso(columns_per_mutation, y, alpha):
 
 def read_and_parse(input_file):
     value_desc = None
-    muts_descs = {}
+    merged_dict = {}
     not_to_skip = False
     with open(input_file, 'r') as inf:
         for line in inf.readlines():
@@ -53,14 +54,14 @@ def read_and_parse(input_file):
                 new_line = line.split('\n')[0]
                 if new_line == '':
                     new_line = 'wt'
-                if new_line not in muts_descs:
-                    muts_descs[new_line] = value_desc
+                if new_line not in merged_dict:
+                    merged_dict[new_line] = value_desc
                 not_to_skip = False
             if 'descriptors' in words:
                 value_desc = [float(w) for w in words[2:-4]]
                 not_to_skip = True
-    del muts_descs['wt']
-    return muts_descs
+    del merged_dict['wt']
+    return merged_dict
 
 
 def read_file_only_sites(input_file):
@@ -229,46 +230,3 @@ def cut_to_dec_inc(common_elements, mut_to_cor):
         if values[1] < 0:
             decrease_value.append((values[0], values[1]))
     return increase_value, decrease_value
-
-
-
-#merged_dict = read_and_parse('../analysis/GA_analysis/logouts/log_within_6')
-#write_to_file(merged_dict, 'muts_within_6')
-
-file_name = 'out_muts_within_6'
-correlation_first_sites, correlation_second_sites = correlation_between_sites(file_name)
-correlation_first_sites = sorted(correlation_first_sites, key=lambda x: x[2])
-correlation_second_sites = sorted(correlation_second_sites, key=lambda x: x[2])
-
-correlation_first, correlation_second, values, columns_per_mutation, unique_sites = correlation_between_muts(file_name)
-correlation_first = sorted(correlation_first, key=lambda x: x[2])
-correlation_second = sorted(correlation_second, key=lambda x: x[2])
-
-first_desc = [x[0] for x in values]
-second_desc = [x[1] for x in values]
-model_coef_first = lasso(columns_per_mutation, first_desc, 0.1)
-model_coef_second = lasso(columns_per_mutation, second_desc, 0.1)
-
-common_elements_first, mut_to_cor_first = compare_correl_lasso(correlation_first, model_coef_first)
-common_elements_second, mut_to_cor_second = compare_correl_lasso(correlation_second, model_coef_second)
-
-
-increase_value_first, decrease_value_first = cut_to_dec_inc(common_elements_first, mut_to_cor_first)
-increase_value_second, decrease_value_second = cut_to_dec_inc(common_elements_second, mut_to_cor_second)
-
-if increase_value_first:
-    print('Mutation increasing delta pKa')
-    for mut in increase_value_first:
-        print(mut[0])
-if decrease_value_first:
-    print('Mutation decreasing delta pKa')
-    for mut in decrease_value_second:
-        print(mut[0])
-if increase_value_second:
-    print('Mutation increasing dihedral angle')
-    for mut in increase_value_second:
-        print(mut[0])
-if decrease_value_second:
-    print('Mutation decreasing dihedral angle')
-    for mut in decrease_value_second:
-        print(mut[0])
