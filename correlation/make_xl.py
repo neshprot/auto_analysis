@@ -1,6 +1,8 @@
 from openpyxl import Workbook
 from openpyxl.drawing.image import Image
 from openpyxl.styles import PatternFill, Border, Side
+from openpyxl.cell.text import InlineFont
+from openpyxl.cell.rich_text import TextBlock, CellRichText
 
 
 def make_exel_file(params, file_name, best_correlations, correlations):
@@ -10,6 +12,13 @@ def make_exel_file(params, file_name, best_correlations, correlations):
     ws = wb.active
     letter_first = 65
     step = 8    # 4 - это отступ в один столбец между
+    only_best_muts = []
+    for idx, x in enumerate(best_correlations):
+        only_best_muts.append([])
+        for y in x:
+            if x:
+                only_best_muts[idx].append(y[0])
+
     # Заголовки колонок
     for column_idx in range(len(params)):
         ws[f"{chr(letter_first)}1"] = f"Parameter {column_names[column_idx]}"
@@ -22,11 +31,26 @@ def make_exel_file(params, file_name, best_correlations, correlations):
         ws[f"{chr(letter_first + 5)}2"] = correlation_column_names[2]
         ws[f"{chr(letter_first + 6)}2"] = correlation_column_names[3]
         letter_first += step
-    colors = ["7cedac", "97e6ed", "dd76ef", "9f88ec"]
+
+    colors = ['b86f50', 'e53b44', '327345', '0484d1']
     for i, slices in enumerate(params):
         for j, muts in enumerate(slices):
             cell = ws.cell(row=j + 3, column=i*step + 1)
-            cell.value = muts[0]
+            # recolor words
+            words = muts[0].split()
+            rich_string = CellRichText()
+            for word_idx, word in enumerate(words):
+                color_idx = []
+                for idx, best_mut in enumerate(only_best_muts):
+                    if word in best_mut:
+                        color_idx.append(idx)
+                if color_idx:
+                    rich_string.append(TextBlock(InlineFont(color=colors[color_idx[-1]]), f" {word}"))
+                elif word_idx == 0:
+                    rich_string.append(word)
+                else:
+                    rich_string.append(f' {word}')
+            cell.value = rich_string
             cell = ws.cell(row=j + 3, column=i * step + 2)
             cell.value = round(muts[1][0], 2)
             cell = ws.cell(row=j + 3, column=i * step + 3)

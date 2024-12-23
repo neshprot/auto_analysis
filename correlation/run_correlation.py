@@ -7,6 +7,7 @@ from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.feature_selection import SelectFromModel
 from top_mutations_seq import *
 
+
 def lasso(columns_per_mutation, y, alpha, unique_sites):
     X = np.column_stack(columns_per_mutation)
 
@@ -24,7 +25,6 @@ def lasso(columns_per_mutation, y, alpha, unique_sites):
     # Выбор признаков на основе важности
     X_train_selected = sfm.transform(X_train)
     X_test_selected = sfm.transform(X_test)
-
     lasso_model = Lasso(alpha=alpha)
     lasso_model.fit(X_train_selected, y_train)
 
@@ -42,6 +42,7 @@ def lasso(columns_per_mutation, y, alpha, unique_sites):
             model_coef.append([unique_sites[i], importance])
 
     return model_coef
+
 
 def read_and_parse(input_file):
     value_desc = None
@@ -119,6 +120,7 @@ def read_file_sites_and_muts(input_file):
     values = [[x[0] / x[2], x[1] / x[2]] for x in values]
     return mutation_sets, values, actually_muts, muts_values
 
+
 def numerical_to_onehot(numerical_arrays):
     """
     Converts multiple numerical arrays to one-hot encoded sparse arrays.
@@ -160,6 +162,7 @@ def numerical_to_onehot(numerical_arrays):
 
     return onehot_arrays, sorted(list(unique_values))
 
+
 def create_column_arrays(arrays):
     """
     Creates new arrays from the columns of multiple input arrays.
@@ -172,6 +175,7 @@ def create_column_arrays(arrays):
     """
     stacked_array = np.column_stack(arrays)
     return [stacked_array[i, :] for i in range(stacked_array.shape[0])]
+
 
 def find_correlation(columns_per_mutation, values, unique_sites, alpha):
     correlation_first = []

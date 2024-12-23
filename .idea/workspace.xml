@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3f847a36-ae1a-4ca4-be2b-116978f3012d" name="Changes" comment="make one excel file with top mutants and highlight increasing and decreasing">
+    <list default="true" id="3f847a36-ae1a-4ca4-be2b-116978f3012d" name="Changes" comment="Add features to exel file: colors, borders, correlations">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/correlation/make_xl.py" beforeDir="false" afterPath="$PROJECT_DIR$/correlation/make_xl.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/correlation/run_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/correlation/run_analysis.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/correlation/run_correlation.py" beforeDir="false" afterPath="$PROJECT_DIR$/correlation/run_correlation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/correlation/top_mutations_seq.py" beforeDir="false" afterPath="$PROJECT_DIR$/correlation/top_mutations_seq.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,11 +56,12 @@
     "Python.make_xl.executor": "Run",
     "Python.run_analysis.executor": "Run",
     "Python.run_correlation.executor": "Run",
+    "Python.test (1).executor": "Run",
     "Python.test.executor": "Run",
     "Python.top_mutations_seq.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/HP/PycharmProjects/useful_scripts",
+    "last_opened_file_path": "C:/Users/HP/PycharmProjects/auto_analysis",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
@@ -132,6 +132,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="test (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="auto_analysis" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="auto_analysis" />
       <option name="ENV_FILES" value="" />
@@ -154,35 +176,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="top_mutations_seq" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="auto_analysis" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/correlation" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/correlation/top_mutations_seq.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python.run_analysis" />
         <item itemvalue="Python.test" />
-        <item itemvalue="Python.make_xl" />
         <item itemvalue="Python.run_correlation" />
-        <item itemvalue="Python.top_mutations_seq" />
+        <item itemvalue="Python.test (1)" />
+        <item itemvalue="Python.make_xl" />
       </list>
     </recent_temporary>
   </component>
@@ -226,7 +226,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734440838806</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Add features to exel file: colors, borders, correlations">
+      <option name="closed" value="true" />
+      <created>1734449331964</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1734449331964</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -243,6 +251,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="The main block with all functions" />
     <MESSAGE value="make one excel file with top mutants and highlight increasing and decreasing" />
-    <option name="LAST_COMMIT_MESSAGE" value="make one excel file with top mutants and highlight increasing and decreasing" />
+    <MESSAGE value="Add features to exel file: colors, borders, correlations" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add features to exel file: colors, borders, correlations" />
   </component>
 </project>
